@@ -1,50 +1,29 @@
-
+import { UserContext } from './consstext'
 import { useState } from 'react'
 import './App.css'
+import { Dashboard } from './components/Dashboard'
+
 export default function App() {
-  const[people, setPeople] = useState([
-    {id : 101, name : "Armen", surname : "Sargsyan", salary : 240_000},
-    {id : 102, name : "Sargis", surname : "Abgaryan", salary : 180_000},
-    {id : 103, name : "Armine", surname : "Sahakyan", salary : 200_000},
-    {id : 104, name : "Vachik", surname : "Qalantaryan", salary : 120_000},
-    {id : 105, name : "Simon", surname : "Simonyan", salary : 250_000},
-    {id : 106, name : "Karine", surname : "Kirakosyan", salary : 220_000},
-  ])
+  
+  const [users, setUsers] = useState([
+    {id : 100, name : " Armen", age : 29, salary : 230_000},
+    {id : 101, name : " Arman", age : 39, salary : 330_000},
+    {id : 102, name : " Karmen", age : 49, salary : 430_000},
+    {id : 103, name : " Armine", age : 19, salary : 250_000}
+  ]);
 
-  const handleSalaryUp = (id) => {
-    let temp = [...people];
-    let index = temp.findIndex(x => x.id == id);
-    temp[index].salary += 50_000;
-    setPeople(temp);
+
+  const removeUser = id => {
+    setUsers(users.filter(user => user.id != id));
   }
 
-
-  const handleSalaryDown = (id) => {
-    let temp = [...people];
-    let index = temp.findIndex(x => x.id == id);
-    if (temp[index].salary - 50_000 < 50_000) {
-      temp[index].salary = 50_000;
-    } else {
-      temp[index].salary -= 50_000;
-    }
-    setPeople(temp);
-  }
-
-  const removeEmployee = (id) => {
-    let temp = people.filter(elem => elem.id != id);
-    setPeople(temp);
+  const handleAdd = user => {
+    setUsers([...users, {...user, id : Date.now()}]);
   }
 
   return <>
-    {
-      people.map(item => <div key={item.id}>
-        <p>{item.name} {item.surname} <strong>{item.salary} AMD</strong></p>
-        <button onClick={() => handleSalaryUp(item.id)}>Salary up</button>
-        <button onClick={() => handleSalaryDown(item.id)}>Salary down</button>
-        <button onClick={() => removeEmployee(item.id)}>Remove</button>
-      </div>
-        
-      )
-    }
+    <UserContext.Provider value={{users, onRemove : removeUser, onAdd : handleAdd}}>
+      <Dashboard/>
+    </UserContext.Provider>
   </>
 }
