@@ -4,6 +4,8 @@ import { useState } from "react"
 
 export const ToDoList = () => {
     const [todos, setTodos] = useState([]);
+    const [completed, setCompleted] = useState([]);
+
 
     const addToDo = value => {
         setTodos([...todos, value])
@@ -15,20 +17,18 @@ export const ToDoList = () => {
         setTodos(temp);
     }
 
-    const completeTask = task => {
-
+    const addToComleted = elm => {
+        setCompleted([...completed, elm]);
+        removeToDo(elm);
     }
-
-    const cancelComplete = task => {
-
-    }
+   
 
     return <div>
         <List
             todos = {todos}
+            completed = {completed}
+            onCompleted={addToComleted}
             onRemove = {removeToDo}
-            onComplete = {completeTask}
-            onCancel = {cancelComplete} 
         />
         <AddToDo
             onAdd = {addToDo}
