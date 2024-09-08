@@ -24,7 +24,7 @@ export const AddUser = () => {
         if (!user.name.trim() || !user.age || !user.salary) {
             return setError("ERROR!1");
         } 
-        else if (typeof user.name != "string" || typeof user.age != "number" || typeof user.salary != "number") {
+        else if (typeof user.name != "string" || Number.isNaN(user.age) || Number.isNaN(user.salary)) {
             return setError("ERROR!2");
         }
         
