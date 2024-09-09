@@ -45,11 +45,11 @@ export const AddUser = () => {
             />
             <input placeholder="age"
             value={user.age}
-            onChange={e => setUser({...user, age : +e.target.value})}
+            onChange={e => setUser({...user, age : Number(e.target.value)})}
             />
             <input placeholder="salary"
             value={user.salary}
-            onChange={e => setUser({...user, salary : +e.target.value})}
+            onChange={e => setUser({...user, salary : Number(e.target.value)})}
              /> 
             <button>add</button>
         </form>
