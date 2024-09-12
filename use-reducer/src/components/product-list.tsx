@@ -21,7 +21,7 @@ export const ProductList = () => {
                     />
                     <p>{product.name}</p>
                     <p><strong>{product.price} AMD</strong></p>
-                    <button onClick={() => dispatch({type : "move", payload : product.id})}>move</button>
+                    <button onClick={() => dispatch({type : "move/product", payload : product.id})}>move</button>
                 </div>
             )
         }

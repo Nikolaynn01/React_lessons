@@ -3,7 +3,7 @@ import { IAction, IState } from "./types";
 export const reducer = (state : IState, action : IAction) :IState => {
 
     switch (action.type) {
-        case "move" :
+        case "move/product" :
             return {
                 ...state,
                 products : state.products,
@@ -15,7 +15,7 @@ export const reducer = (state : IState, action : IAction) :IState => {
                 )]
             }
             
-        case "add/product" :
+        case "add/count" :
             return {
                 ...state,
                 products : state.products,
@@ -24,7 +24,7 @@ export const reducer = (state : IState, action : IAction) :IState => {
                     {...elm, count : elm.count + 1} : {...elm}
                 )
             }
-        case "sub/product" : 
+        case "sub/count" : 
             return {
                 ...state,
                 products : state.products,
